@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Website Designer with HTML Output</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            background-color: #282c34;
+            color: #ffffff;
+        }
+        header {
+            background-color: #61dafb;
+            padding: 10px;
+            text-align: center;
+            font-size: 24px;
+        }
+        #toolbar {
+            padding: 10px;
+            background-color: #444;
+            text-align: center;
+        }
+        button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+            background-color: #61dafb;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #21a1f1;
+        }
+        #designArea {
+            padding: 20px;
+            background-color: white;
+            color: black;
+            min-height: 300px;
+            width: 100%;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+        }
+        #htmlOutput {
+            padding: 10px;
+            background-color: #1e1e1e;
+            color: #dcdcdc;
+            height: 200px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Visual Website Designer
+    </header>
+
+    <div id="toolbar">
+        <button onclick="addElement('h1')">Add Heading</button>
+        <button onclick="addElement('p')">Add Paragraph</button>
+        <button onclick="addElement('img')">Add Image</button>
+        <button onclick="generateHTML()">Show HTML</button>
+    </div>
+
+    <div id="designArea" contenteditable="true">
+        <!-- The user can visually design the site here -->
+    </div>
+
+    <pre id="htmlOutput"><!-- HTML output will be shown here --></pre>
+
+    <script>
+        function addElement(type) {
+            const designArea = document.getElementById('designArea');
+            let newElement;
+            
+            if (type === 'h1') {
+                newElement = document.createElement('h1');
+                newElement.textContent = 'Heading Text';
+            } else if (type === 'p') {
+                newElement = document.createElement('p');
+                newElement.textContent = 'This is a sample paragraph. You can edit this text.';
+            } else if (type === 'img') {
+                newElement = document.createElement('img');
+                newElement.src = 'https://via.placeholder.com/150';
+                newElement.alt = 'Placeholder Image';
+                newElement.style.display = 'block';
+                newElement.style.margin = '10px 0';
+            }
+
+            if (newElement) {
+                designArea.appendChild(newElement);
+            }
+        }
+
+        function generateHTML() {
+            const designArea = document.getElementById('designArea');
+            const htmlOutput = document.getElementById('htmlOutput');
+            
+            // Getting the inner HTML of the design area
+            const rawHTML = designArea.innerHTML;
+
+            // Output the actual HTML into the HTML Output section
+            htmlOutput.textContent = rawHTML;
+        }
+    </script>
+</body>
+</html>
